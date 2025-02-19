@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <audio id="background-sound" src="Soundtrack background.mp3" preload="auto" loop></audio>
+    <div id="notification-box" class="notification-box">
+        <div id="text-noti">
+            <p><strong>Welcome to FTC Tic Tac Toe.<br>Have fun and enjoy!</strong></p>
+        </div>
+        <button id="close-notification" class="close-button game-start-apt">Certainly!</button>
+    </div>
+    <audio id="game-start-apt" src="APT-GAME-START.mp3" preload="auto"></audio>
+    <div id="volume-control-container">
+        <label for="volume-slider"><b>Volume</b></label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+    </div>
+    <div id="main-page" class="page active">
+        <h1><span class="neon-ftc">FTC</span> Tic Tac Toe</h1>
+        <div class="grid-display">
+            <div class="cell-display">O</div>
+            <div class="cell-display">X</div>
+            <div class="cell-display">O</div>
+            <div class="cell-display">X</div>
+            <div class="cell-display">O</div>
+            <div class="cell-display">X</div>
+            <div class="cell-display">O</div>
+            <div class="cell-display">X</div>
+            <div class="cell-display">O</div>
+        </div>
+        <button id="start" class="main-button button-sound" onclick="navigateTo('button-select')">START GAME</button>
+    </div>
+
+    <div id="button-select" class="page hidden">
+        <h1><span class="neon-ftc">FTC</span> Tic Tac Toe</h1>
+        <div class="buttons">
+            <button id="singleplayer" aria-label="Start a single-player game">👤⚔️🤖 SINGLEPLAYER</button>
+            <button id="multiplayer" aria-label="Start a multiplayer game" onclick="navigateTo('player-name-input')">
+                👤⚔️👤 MULTIPLAYER
+            </button>
+
+            <button id="leaderboard" aria-label="View the leaderboard">🥇🏆📶 LEADERBOARD</button>
+
+        </div>
+        <button class="return-button-custom" onclick="navigateTo('main-page')">🏠︎ HOME</button>
+    </div>
+
+    <div id="player-name-input" class="page hidden">
+        <h2>Player Customization</h2>
+        <form id="player-name-form">
+            <div class="input-container">
+                <label class="input-name" for="player1-name">
+                    <img src="Player 1.png" class="Player-icon">
+                </label><br>
+                <input type="text" id="player1-name" placeholder="Enter Player 1's Name" required autocomplete="off">
+                <div class="icon-selection">
+                    <label>
+                        <input type="radio" name="player1-icon" value="Drummer.png" required hidden>
+                        <img src="Drummer.png" class="icon-option" onclick="selectIcon(this, 'player1-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player1-icon" value="Guitarist.png" hidden>
+                        <img src="Guitarist.png" class="icon-option" onclick="selectIcon(this, 'player1-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player1-icon" value="Keyboardist.png" hidden>
+                        <img src="Keyboardist.png" class="icon-option" onclick="selectIcon(this, 'player1-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player1-icon" value="Vocalist.png" hidden>
+                        <img src="Vocalist.png" class="icon-option" onclick="selectIcon(this, 'player1-icon')">
+                    </label>
+                </div>
+            </div>
+            <div class="input-container">
+                <label class="input-name" for="player2-name">
+                    <img src="Player 2.png" class="Player-icon">
+                </label><br>
+                <input type="text" id="player2-name" placeholder="Enter Player 2's Name" required autocomplete="off">
+                <div class="icon-selection">
+                    <label>
+                        <input type="radio" name="player2-icon" value="Drummer.png" required hidden>
+                        <img src="Drummer.png" class="icon-option" onclick="selectIcon(this, 'player2-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player2-icon" value="Guitarist.png" hidden>
+                        <img src="Guitarist.png" class="icon-option" onclick="selectIcon(this, 'player2-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player2-icon" value="Keyboardist.png" hidden>
+                        <img src="Keyboardist.png" class="icon-option" onclick="selectIcon(this, 'player2-icon')">
+                    </label>
+                    <label>
+                        <input type="radio" name="player2-icon" value="Vocalist.png" hidden>
+                        <img src="Vocalist.png" class="icon-option" onclick="selectIcon(this, 'player2-icon')">
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="main-button" id="submit-button" disabled onclick="submitPlayerNames()">SUBMIT</button>
+        </form>
+        <button class="return-button-custom" onclick="navigateTo('button-select')">↩ BACK</button>
+    </div>
+
+    <div class="game-container page hidden" id="mode-selection">
+        <h2>Select Game Mode</h2>
+        <div class="mode-selection">
+            <!-- Left Arrow -->
+            <button id="left-arrow" class="arrow">⬅</button>
+
+            <!-- Grid Display -->
+            <div class="grid-container">
+                <div id="grid" class="grid"></div>
+            </div>
+
+            <!-- Right Arrow -->
+            <button id="right-arrow" class="arrow">➡</button>
+        </div>
+
+        <!-- Mode Info -->
+        <div class="mode-info">
+        </div>
+
+        <!-- Start Button -->
+        <button id="start-game" class="start-button">PLAY</button>
+        <button class="return-button-custom" onclick="navigateTo('player-name-input')">↩ BACK</button>
+    </div>
+
+
+    <!-- Gameplay -->
+    <div id="game-container">
+        <audio id="ready-go-sound" src="Ready Go Effects.mp3" preload="auto"></audio>
+        <div id="player-boxes" class="player-boxes">
+            <div id="player1-box" class="player-box">
+                <img id="player1-icon" class="player-icon" alt="Player 1 Icon">
+                <span id="player1-name" class="player-name"></span>
+            </div>
+            <!-- 3x3 Game Mode -->
+            <div id="play33" class="page hidden">
+                <div class="notification-box game-rule-box">
+                    <div id="text-noti">
+                        <p class="game-rule"><strong>GAME RULE</strong></p>
+                        <p class="game-rule-content">A player <b>WINS</b> if they get <b>3</b> of their marks in a row,
+                            column, or diagonal. If
+                            all squares are filled and no player has won, the game is a <b>DRAW</b>.</p>
+                    </div>
+                    <button class="close-button">Got it!</button>
+                </div>
+                <div class="game-section">
+                    <div id="turn-indicator-3x3" class="turn-indicator"></div>
+                    <div id="game-board-3x3" class="game-board"></div>
+                    <div id="winning-message-3x3" class="winning-message hidden">
+                        <div class="winning-header">
+                            <span class="crown-icon"><img src="Mascot smile.png" class="winning-mascot"
+                                    alt="Crown Icon"></span>
+                            <div id="winning-message-text-3x3"></div>
+                        </div>
+                        <div class="button-container">
+                            <button class="restart-button" data-mode="3x3"><i style="font-size:24px"
+                                    class="fa">&#xf01e;</i>
+                                Replay</button>
+                        </div>
+                    </div>
+
+                    <!-- Firework sound -->
+                    <audio id="firework-sound" src="Winning.mp3" preload="auto"></audio>
+                    <audio id="draw-sound" src="Draw.mp3" preload="auto"></audio>
+                </div>
+                <div class="return-button">
+                    <button class="return-button-custom" onclick="navigateTo('mode-selection')">↩ BACK</button>
+                </div>
+            </div>
+
+            <!-- 4x4 Game Mode -->
+            <div id="play44" class="page hidden">
+                <div id="notification-box" class="notification-box game-rule-box">
+                    <div id="text-noti">
+                        <p class="game-rule"><strong>GAME RULE</strong></p>
+                        <p class="game-rule-content">A player <b>WINS</b> if they get <b>3</b> of their marks in a row,
+                            column, or diagonal. If
+                            all squares are filled and no player has won, the game is a <b>DRAW</b>.</p>
+                    </div>
+                    <button id="close-notification" class="close-button">Got it!</button>
+                </div>
+                <div class="game-section">
+                    <div id="turn-indicator-4x4" class="turn-indicator"></div>
+                    <div id="game-board-4x4" class="game-board"></div>
+                    <div id="winning-message-4x4" class="winning-message hidden">
+                        <div class="winning-header">
+                            <span class="crown-icon"><img src="Mascot smile.png" class="winning-mascot"
+                                    alt="Crown Icon"></span>
+                            <div id="winning-message-text-4x4"></div>
+                        </div>
+                        <div class="button-container">
+                            <button class="restart-button" data-mode="4x4"><i style="font-size:24px"
+                                    class="fa">&#xf01e;</i>
+                                Replay</button>
+                        </div>
+                    </div>
+
+                    <!-- Firework sound -->
+                    <audio id="firework-sound" src="Winning.mp3" preload="auto"></audio>
+                    <audio id="draw-sound" src="Draw.mp3" preload="auto"></audio>
+                </div>
+                <div class="return-button">
+                    <button class="return-button-custom" onclick="navigateTo('mode-selection')">↩ BACK</button>
+                </div>
+            </div>
+
+            <!-- 5x5 Game Mode -->
+            <div id="play55" class="page hidden">
+                <div id="notification-box" class="notification-box game-rule-box">
+                    <div id="text-noti">
+                        <p class="game-rule"><strong>GAME RULE</strong></p>
+                        <p class="game-rule-content">A player <b>WINS</b> if they get <b>3</b> of their marks in a row,
+                            column, or diagonal. If
+                            all squares are filled and no player has won, the game is a <b>DRAW</b>.</p>
+                    </div>
+                    <button id="close-notification" class="close-button">Got it!</button>
+                </div>
+                <div class="game-section">
+                    <div id="turn-indicator-5x5" class="turn-indicator"></div>
+                    <div id="game-board-5x5" class="game-board"></div>
+                    <div id="winning-message-5x5" class="winning-message hidden">
+                        <div class="winning-header">
+                            <span class="crown-icon"><img src="Mascot smile.png" class="winning-mascot"
+                                    alt="Crown Icon"></span>
+                            <div id="winning-message-text-5x5"></div>
+                        </div>
+                        <div class="button-container">
+                            <button class="restart-button" data-mode="5x5"><i style="font-size:24px"
+                                    class="fa">&#xf01e;</i>
+                                Replay</button>
+                        </div>
+                    </div>
+
+                    <!-- Firework sound -->
+                    <audio id="firework-sound" src="Winning.mp3" preload="auto"></audio>
+                    <audio id="draw-sound" src="Draw.mp3" preload="auto"></audio>
+                </div>
+                <div class="return-button">
+                    <button class="return-button-custom" onclick="navigateTo('mode-selection')">↩ BACK</button>
+                </div>
+            </div>
+            <div id="player2-box" class="player-box">
+                <img id="player2-icon" class="player-icon" alt="Player 2 Icon">
+                <span id="player2-name" class="player-name"></span>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p id="copyright">&copy; 2025 FTC Tic Tac Toe. All Rights Reserved | This website is designed and built by KAD</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

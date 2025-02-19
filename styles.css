@@ -1,0 +1,769 @@
+/* General Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: linear-gradient(#0D1742, #DCB968) !important;
+}
+
+h1, h2 {
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00;
+    margin: 5px;
+    font-size: 50px;
+}
+
+
+.neon-ftc {
+    animation: neon-blink 2.5s infinite alternate;
+}
+
+@keyframes neon-blink {
+    0% {
+        color: #037594;
+        text-shadow: 
+            0 0 10px #0D1742, 
+            0 0 20px #0D1742, 
+            0 0 30px #0D1742, 
+            0 0 40px #0D1742, 
+            0 0 50px #0D1742, 
+            0 0 75px #0D1742;
+    }
+    50% {
+        color: #ffcc00; /* Switch to yellow when glowing fades */
+        text-shadow: 
+            0 0 20px #ffcc00, 
+            0 0 30px #ffcc00, 
+            0 0 50px #ffcc00, 
+            0 0 75px #ffcc00, 
+            0 0 100px #ffcc00;
+    }
+    100% {
+        color: rgb(242, 114, 136);
+        text-shadow: 
+            0 0 10px rgb(242, 114, 136), 
+            0 0 20px rgb(242, 114, 136), 
+            0 0 30px rgb(242, 114, 136), 
+            0 0 40px rgb(242, 114, 136), 
+            0 0 50px rgb(242, 114, 136), 
+            0 0 75px rgb(242, 114, 136);
+    }
+}
+
+
+#start {
+    background-color: #ff4500;
+    box-shadow: 0 0 10px #ff4500;
+    color: rgba(1, 0, 0, 0.696);
+}
+
+.return-button {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5em;
+}
+
+.return-button-custom {
+    position: absolute; /* Position relative to the closest positioned ancestor or the page */
+    top: 10px; /* Distance from the top of the page */
+    left: 10px; /* Distance from the left of the page */
+    background-color: #ffcc00; /* Customize the background color */
+    font-size: 1rem; /* Adjust size as needed */
+    padding: 10px 15px; /* Add some padding for aesthetics */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 0 10px #ffcc00; /* Add a glow effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.return-button-custom:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    box-shadow: 0 0 20px #ffcc00; /* Increase the glow effect on hover */
+}
+
+
+
+
+/* Game board display on main page */
+.grid-display {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    margin: 20px auto;
+}
+
+.cell-display {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    color: #00f;
+    background-color: #222;
+    border: 2px solid #444;
+    text-shadow: 0 0 10px #00f;
+}
+
+.cell-display:nth-child(odd) {
+    color: #f00;
+    text-shadow: 0 0 10px #f00;
+}
+
+.page {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.page.active {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Buttons */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons-select {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border:none;
+    cursor: pointer;
+    text-shadow: 0 0 5px #fff;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #00ffff, 0 0 70px #ff00cc;
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Start button with glowing effect */
+.start-button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    background-color: #ffcc00;
+    color: #000;
+    text-shadow: 0 0 5px #fff;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+.start-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #00ffff, 0 0 70px #ff00cc;
+}
+
+
+#singleplayer {
+    background-color: #ff4500;
+    box-shadow: 0 0 10px #ff4500;
+}
+
+#multiplayer {
+    background-color: #1e90ff;
+    box-shadow: 0 0 10px #1e90ff;
+}
+
+#leaderboard {
+    background-color: #32cd32;
+    box-shadow: 0 0 10px #32cd32;
+}
+
+#mode3x3 {
+    background-color: #ff4500;
+    box-shadow: 0 0 10px #ff4500;
+}
+
+#mode4x4 {
+    background-color: #1e90ff;
+    box-shadow: 0 0 10px #1e90ff;
+}
+
+#mode5x5 {
+    background-color: #32cd32;
+    box-shadow: 0 0 10px #32cd32;
+}
+
+.restart-button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #ffcc00;
+    color: #000;
+    border-radius: 5px;
+}
+
+.restart-button:hover {
+    background-color: #ffaa00;
+}
+
+
+/* Game Board */
+.game-section {
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.game-board {
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#game-board-3x3 {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+#game-board-4x4 {
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(4, 80px);
+}
+
+#game-board-5x5 {
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid #000;
+    font-size: 1.5em;
+    cursor: pointer;
+    user-select: none;
+    background-size: cover; /* Ensure icons scale properly */
+    background-position: center;
+    cursor: url('pencil.png'), auto;
+}
+
+.cell.x::after, .cell.circle::after {
+    content: none; /* Disable default ::after icons */
+}
+
+
+/* Winning Message */
+.winning-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #bb2649a8;
+    color: #FFD700; /* Gold for text */
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    padding: 20px;
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+    z-index: 1000; /* Make sure it appears above everything else */
+}
+
+/* Crown Icon */
+.crown-icon {
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+}
+
+.winning-mascot{
+    width: 70px;
+    height: auto;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Neon Buttons */
+.restart-button {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #00BFFF; /* Neon blue for Home */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-color: #FF4500; /* Neon orange for Replay */
+    text-shadow: 0 0 10px #FF4500;
+    box-shadow: 0 0 15px #FF4500;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.restart-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #FF4500, 0 0 40px #FF4500;
+}
+
+
+.hidden {
+    display: none;
+}
+
+/*Firework*/
+/* Enhanced Firework Animation */
+@keyframes fireworks {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+/* Spark animation */
+@keyframes spark {
+    0% { transform: scale(3); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.firework {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    animation: fireworks 1s ease-out forwards;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.sparks {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #FF4500;
+    border-radius: 50%;
+    animation: spark 1s ease-out forwards;
+    pointer-events: none;
+}
+
+/* Different color spark classes */
+.spark-blue { background-color: #00BFFF; }
+.spark-orange { background-color: #FF4500; }
+.spark-purple { background-color: #800080; }
+.spark-green { background-color: #32CD32; }
+
+/* Spark shooting outwards */
+.shooting-firework {
+    animation: shoot 5s ease-out forwards;
+}
+
+@keyframes shoot {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-300px); opacity: 0; }
+}
+
+
+
+/* Selection mode display*/
+.game-container {
+    margin: 10px auto;
+    max-width: 600px;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+/* Center the entire mode-selection area */
+.mode-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Add spacing between the grid and arrows */
+}
+
+/* Arrow buttons */
+.arrow {
+    background-color: #00ffff;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px #00ffcc, 0 0 30px #ff00cc;
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+.arrow:hover {
+    box-shadow: 0 0 30px #ff00cc, 0 0 60px #00ffff;
+    transform: scale(1.1);
+}
+
+/* Grid container styling */
+.grid-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+
+
+/* Neon border for the grid */
+.grid {
+    display: grid;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 5px solid; /* Thick border for neon effect */
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #00ffcc, #ff00cc, #00ffff, #ffcc00);
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #ff00cc, 0 0 60px #00ffff, 0 0 80px #ffcc00;
+    border-radius: 10px; /* Optional rounded corners for aesthetics */
+}
+
+/* Neon border for individual cells */
+.grid .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem; /* Increased font size for better visibility */
+    color: white;
+    border: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #00ffcc, #ff00cc, #00ffff, #ffcc00);
+    background-color: rgba(0, 0, 0, 0.5); /* Slight background color for visibility */
+    box-shadow: 0 0 5px #00ffcc;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: url('cursor.png'), auto;
+}
+
+/* Hover effect for cells */
+.grid .cell:hover {
+    box-shadow: 0 0 20px #ff00cc, 0 0 40px #00ffff;
+}
+
+/* Title and mode info styling */
+.title {
+    font-size: 2.5rem;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00;
+}
+
+.mode-info {
+    text-align: center;
+}
+
+.mode-info h3 {
+    font-size: 1.5rem;
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+
+.winning-cell {
+    animation: pulse 1s infinite;
+    background: linear-gradient(45deg, #ffcc00, #00ffff);
+    background-size: 200% 200%;
+    border: 3px solid #fff;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Notification box styling */
+.notification-box {
+    position: fixed;
+    background-color: #f9fafbe9;
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    z-index: 1000;
+    text-align: center;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Gradient text effect */
+#text-noti {
+    background: radial-gradient(#0D1742, #DCB968); /* Gradient colors */
+    -webkit-background-clip: text; /* Necessary for WebKit browsers */
+    background-clip: text; /* For non-WebKit browsers */
+    color: transparent; /* Make sure the color is transparent so the gradient shows */
+}
+
+/* Close button styling */
+.close-button {
+    background-color: #ff4500;
+    box-shadow: 0 0 10px #ff4500;
+    color: rgba(1, 0, 0, 0.696);
+    border: none;
+    padding: 10px 20px;
+    margin:0;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.close-button:hover {
+    background-color: #ff1c1c;
+}
+
+/* Shrinking animation for the box */
+@keyframes shrinkToCenter {
+    0% {
+        opacity: 1;
+        transform: scale(1); /* Start at full size */
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0); /* Shrink to the center */
+    }
+}
+
+.shrink-to-center {
+    animation: shrinkToCenter 0.5s forwards; /* Shrinks box to center */
+}
+
+
+/*Volume control*/
+#volume-control-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#volume-slider {
+    width: 150px;
+}
+
+input[type="text"] {
+    padding: 15px; /* Adjusted padding */
+    line-height: 1.5; /* Adjusted line-height */
+    font-size: 18px;
+    width: 70%;
+    height: 45px;
+    margin: 10px 0;
+    background-color: #f5e1da;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+  .Player-icon{
+    width: 70px;
+    height: auto;
+  }
+
+  #player-name-form{
+    padding: 20px;
+  }
+
+  .main-button{
+    background-color: #ffcc00;
+  }
+
+.main-button:disabled {
+    opacity: 0.5;
+}
+
+  .turn-indicator{
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+
+  .turn-indicator-style {
+    font-size: 50px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    margin-top: 0;
+}
+.player-boxes {
+    display: flex;
+    align-items: center;
+    gap: 150px;
+}
+
+.player-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid; /* Adjusted border width */
+    border-radius: 10px; /* Adjusted border-radius */
+    width: 170px; /* Increased width to scale up the boxes */
+    transition: all 0.5s ease;
+}
+
+.player-box.active {
+    border-color: #ffcc00;
+    transform: scale(1.2); /* Slightly increased scale to keep it balanced */
+    box-shadow: 0 0 20px #ffcc00;
+}
+
+.player-icon {
+    width: 120px; /* Increased width */
+    height: auto;
+    margin:0;
+    padding: 20px;
+}
+
+#player-boxes {
+    display: none;
+}
+
+/* html, body {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    background-image: url('Background.png');
+    background-size: cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+* {
+    cursor: url('cursor.png'), auto;
+}
+
+button, .close-button, #volume-slider, .return-button-custom, .arrow, .restart-button {
+    cursor: url('hover.png'), auto;
+}
+
+#player2-name, #player1-name {
+    cursor: url('text.png'), auto;
+}
+
+.start-button {
+    cursor: url('Battle.png'), auto;
+}
+
+.game-rule {
+    transform: scale(1.2);
+    color: #4169E1;
+    text-shadow: 0 0 10px #41bee1;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.game-rule-content {
+    text-align:justify;
+    margin: 0;
+    padding: 0px 30px 20px 30px;
+    width: 360px;
+    height: auto;
+}
+
+.game-rule-box {
+    padding: 15px;
+    padding-bottom: 30px;
+    padding-top: 25px;
+}
+
+
+/* Icon selection */
+.icon-selection {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    gap: 50px;
+}
+
+.icon-option {
+    width: 85px;
+    height: auto;
+    cursor: url('hover.png'), auto;
+    border: 5px solid transparent; /* Adjusted border width */
+    border-radius: 10%; /* Adjusted border-radius */
+    transition: all 0.5s ease;
+}
+
+.icon-option.selected-player1 {
+    border-color: red; /* Red border for player 1 */
+    box-shadow: 0 0 20px rgb(255, 38, 0);
+}
+
+.icon-option.selected-player2 {
+    border-color: rgb(0, 123, 255); /* Blue border for player 2 */
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+.icon-option:hover {
+    border-color: #ffcc00;
+    transform: scale(1.2); /* Slightly increased scale to keep it balanced */
+    box-shadow: 0 0 20px #ffcc00;
+}
+
+.icon-select{
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00;
+    margin: 5px;
+    font-size: 34px;
+}
+
+#copyright {
+    color: black;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
